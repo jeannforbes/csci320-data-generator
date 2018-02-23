@@ -10,6 +10,7 @@
   "author": "j",
   "license": "ISC",
   "dependencies": {
+    "express": "^4.16.2",
     "fake-identity": "^1.0.6",
     "json-2-csv": "^2.1.2",
     "unique-id-generator": "^1.0.1"
