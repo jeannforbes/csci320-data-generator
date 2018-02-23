@@ -1,0 +1,25 @@
+name: Types example
+# typically object or array 
+type: object
+key:
+  build: faker.random.uuid()
+properties:
+  foo:
+    # can be set on properties of an object 
+    type: object
+    properties:
+      bar:
+        # can be set on nested properties 
+        type: string
+        data:
+          value: FakeIt ftw
+  bar:
+    type: array
+    items:
+      # can be set on items 
+      type: string
+      data:
+        min: 1
+        max: 10
+        build: faker.random.word()
+
