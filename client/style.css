@@ -1,0 +1,17 @@
+*{
+
+}
+
+.gen{
+    margin: 5px;
+    padding: 5px;
+}
+
+.gen .title{
+    background-color: #CCC;
+    padding: 5px;
+}
+
+.gen .content{
+    border: solid 1px black;
+}

@@ -1,0 +1,71 @@
+<!doctype html>
+
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+
+  <title>CS350 Data Gen</title>
+  <meta name="description" content="CSV data generator for CS 350">
+  <meta name="author" content="J Forbes">
+
+  <link rel="stylesheet" type="text/css" href="style.css">
+
+  <!--[if lt IE 9]>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.js"></script>
+  <![endif]-->
+</head>
+
+<body>
+  INFO: Any entity sets that depend on other tables (e.g. Payments) are generated based on the previously generated table.  Try it out!<br><br>
+  <button id='generate'>Generate!</button>
+  <select id='selector'>
+    <option value='books'>Books</option>
+    <option value='movies'>Movies</option>
+    <option value='customers'>Customers</option>
+    <option value='payments'>Payments</option>
+    <option value='employees'>Employees</option>
+    <option value='stores'>Stores</option>
+  </select>
+  <input id='number' type='num' value='10'>
+  <div id='container'></div>
+  <script>
+  let genButton;
+  let genSelect;
+  let container;
+
+  window.onload = () => {
+    genButton = document.querySelector('#generate');
+    genSelect = document.querySelector('#selector');
+    genNum = document.querySelector('#number');
+    container = document.querySelector('#container');
+    genButton.onclick = (e) => {
+      let req = new XMLHttpRequest();
+      req.open('GET', '/'+genSelect.value+'?'+genNum.value);
+      req.send();
+      req.onload = (e) => {
+        let json = JSON.parse(req.response);
+        container.innerHTML = JSONtoCSV(json) + '<br>' + container.innerHTML;
+      };
+    }
+  }
+
+  // WARNING! -- will break if contains values
+  //   more than 1 nesting deep
+  function JSONtoCSV(json) {
+    let keys = Object.keys(json);
+    let csv = '<div class="gen"><div class="title">'+genNum.value+' '+genSelect.value+'</div><div class="content">';
+    for(let k=0; k<keys.length; k++){
+      let row = json[keys[k]];
+      let rkeys = Object.keys(row);
+      for(let i=0; i<rkeys.length; i++){
+        csv += row[rkeys[i]];
+        if(i<rkeys.length-1) csv+=', ';
+        else csv += '<br>';
+      }
+    }
+    return csv+'</div></div>';
+  }
+
+  </script>
+</body>
+</html>
