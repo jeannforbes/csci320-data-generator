@@ -1,0 +1,18 @@
+{
+  "name": "cs350_datagen",
+  "version": "1.0.0",
+  "description": "generates fake data for our sql db",
+  "main": "index.js",
+  "scripts": {
+    "start": "node ./index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "j",
+  "license": "ISC",
+  "dependencies": {
+    "fake-identity": "^1.0.6",
+    "json-2-csv": "^2.1.2",
+    "unique-id-generator": "^1.0.1"
+  },
+  "devDependencies": {}
+}
